@@ -52,7 +52,7 @@ async.parallel([
     var info = results[1];
     var bankroll = results[2];
 
-    console.log('Have a bankroll of: ', bankroll/1e8, ' btc');
+    console.log('Have a bankroll of: ', bankroll/1e8, ' NXT');
 
     var lastGameId = info.id;
     var lastHash = info.hash;

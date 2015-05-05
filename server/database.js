@@ -676,7 +676,7 @@ exports.getBankroll = function(callback) {
             var profit = results.rows[0].profit;
             assert(typeof profit === 'number');
 
-            var min = 1e8;
+            var min = 1e8 * 100000; // 100,000 NXT
 
             callback(null, Math.max(min, profit));
         }
