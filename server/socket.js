@@ -108,8 +108,10 @@ module.exports = function(server,game,chat) {
                 return sendError(socket, '[place_bet] Must place a bet in multiples of 100, got: ' + amount);
             }
 
-            if (amount > 1e8) // 1 BTC limit
-                return sendError(socket, '[place_bet] Max bet size is 1 BTC got: ' + amount);
+            var maxBet = typeof process.env.MAX_BET !== 'undefined' ? process.env.MAX_BET : 100000; // 100,000 NXT
+
+            if (amount > 1e8 * maxBet)
+                return sendError(socket, '[place_bet] Max bet size is 100,000 NXT got: ' + amount);
 
             if (!autoCashOut)
                 return sendError(socket, '[place_bet] Must Send an autocashout with a bet');
