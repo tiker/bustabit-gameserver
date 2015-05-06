@@ -676,7 +676,9 @@ exports.getBankroll = function(callback) {
             var profit = results.rows[0].profit;
             assert(typeof profit === 'number');
 
-            var min = 1e8 * 100000; // 100,000 NXT
+            var min = typeof process.env.BANKROLL !== 'undefined' ? process.env.BANKROLL : 1000000; // 1,000,000 NXT
+
+            min *= 1e8; // in nxt quants
 
             callback(null, Math.max(min, profit));
         }
