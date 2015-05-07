@@ -56,6 +56,7 @@ Chat.prototype.say = function(socket, userInfo, message) {
     var msg = {
         time:      now,
         type:      'say',
+        userid:    userInfo.id,
         username:  userInfo.username,
         role:      userInfo.userclass,
         message:   message
