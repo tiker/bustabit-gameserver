@@ -154,6 +154,5 @@ exports.crashPointFromHash = function(serverSeed) {
     var h = parseInt(hash.slice(0,52/4),16);
     var e = Math.pow(2,52);
 
-    return Math.floor((100 * e - h) / (e - h));
+    return Math.floor((99.5 * e - h) / (e - h));
 };
-
