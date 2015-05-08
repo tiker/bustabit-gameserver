@@ -146,13 +146,13 @@ var clientSeed = '000000000000000007a9a31ff7f07463d91af6b5454241d5faf282e5e0fe1b
 exports.crashPointFromHash = function(serverSeed) {
     var hash = crypto.createHmac('sha256', serverSeed).update(clientSeed).digest('hex');
 
-    // In 1 of 101 games the game crashes instantly.
-    if (divisible(hash, 101))
+    // In 1 of 67 games the game crashes instantly. // 1,492%
+    if (divisible(hash, 67))
         return 0;
 
     // Use the most significant 52-bit from the hash to calculate the crash point
     var h = parseInt(hash.slice(0,52/4),16);
     var e = Math.pow(2,52);
 
-    return Math.floor((99.5 * e - h) / (e - h));
+    return Math.floor((100 * e - h) / (e - h));
 };
