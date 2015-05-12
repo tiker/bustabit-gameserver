@@ -25,7 +25,7 @@ if (process.env.USE_HTTPS) {
     };
 
     if (process.env.HTTPS_CA) {
-        options.ca = fs.readFileSync(process.env.HTTPS_CA);
+        options.ca = [fs.readFileSync(process.env.HTTPS_CA)];
     }
 
     server = require('https').createServer(options).listen(port, function() {
