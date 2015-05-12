@@ -21,15 +21,16 @@ if (process.env.USE_HTTPS) {
         key: fs.readFileSync(path.join(__dirname, '/nginx.key')),
         cert: fs.readFileSync(path.join(__dirname, '/nginx.crt')),
         secureProtocol: 'SSLv23_method',
-        secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2
-    };
-
-    options.ca = [
-            fs.readFileSync(path.join(__dirname, '/AddTrustExternalCARoot.crt')),
+        secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2,
+        ca: [
             fs.readFileSync(path.join(__dirname, '/COMODORSAAddTrustCA.crt')),
-            fs.readFileSync(path.join(__dirname, '/COMODORSADomainValidationSecureServerCA.crt'))
-        ];
-
+            fs.readFileSync(path.join(__dirname, '/COMODORSADomainValidationSecureServerCA.crt')),
+            fs.readFileSync(path.join(__dirname, '/AddTrustExternalCARoot.crt'))
+        ],
+        requestCert: true,
+        rejectUnauthorized: false
+    };
+    
     server = require('https').createServer(options).listen(port, function() {
         console.log('Listening on port ', port, ' on HTTPS!');
     });
