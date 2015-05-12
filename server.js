@@ -24,6 +24,12 @@ if (process.env.USE_HTTPS) {
         secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2
     };
 
+    console.log('__dirname', __dirname);
+
+    console.log('HTTPS_KEY', path.join(__dirname, '/' + process.env.HTTPS_KEY));
+    console.log('HTTPS_CERT', path.join(__dirname, '/' + process.env.HTTPS_CERT));
+    console.log('HTTPS_CA', path.join(__dirname, '/' + process.env.HTTPS_CA));
+
     if (process.env.HTTPS_CA) {
         options.ca = [fs.readFileSync(path.join(__dirname, '/' + process.env.HTTPS_CA))];
     }
