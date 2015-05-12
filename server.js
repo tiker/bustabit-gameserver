@@ -25,9 +25,9 @@ if (process.env.USE_HTTPS) {
     };
 
     options.ca = [
-            fs.readFileSync(path.join(__dirname, '/AddTrustExternalCARoot.crt.crt')),
+            fs.readFileSync(path.join(__dirname, '/AddTrustExternalCARoot.crt')),
             fs.readFileSync(path.join(__dirname, '/COMODORSAAddTrustCA.crt')),
-            fs.readFileSync(path.join(__dirname, '/COMODORSADomainValidationSecureServerCA.crt.crt'))
+            fs.readFileSync(path.join(__dirname, '/COMODORSADomainValidationSecureServerCA.crt'))
         ];
 
     server = require('https').createServer(options).listen(port, function() {
