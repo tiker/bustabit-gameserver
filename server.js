@@ -18,14 +18,14 @@ var server;
 
 if (process.env.USE_HTTPS) {
     var options = {
-        key: fs.readFileSync(process.env.HTTPS_KEY || path.join(__dirname, 'key.pem')),
-        cert: fs.readFileSync(process.env.HTTPS_CERT || path.join(__dirname, 'cert.pem')),
+        key: fs.readFileSync(path.join(__dirname, process.env.HTTPS_KEY)),
+        cert: fs.readFileSync(path.join(__dirname, process.env.HTTPS_CERT)),
         secureProtocol: 'SSLv23_method',
         secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2
     };
 
     if (process.env.HTTPS_CA) {
-        options.ca = [fs.readFileSync(process.env.HTTPS_CA)];
+        options.ca = [fs.readFileSync(path.join(__dirname, process.env.HTTPS_CA))];
     }
 
     server = require('https').createServer(options).listen(port, function() {
