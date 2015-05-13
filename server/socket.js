@@ -5,11 +5,13 @@ var lib = require('./lib');
 
 module.exports = function(server,game,chat) {
     var io = socketio(server);
+    var nsp = nsp.of('/game');
+
 
     (function() {
         function on(event) {
             game.on(event, function (data) {
-                io.to('joined').emit(event, data);
+                nsp.to('joined').emit(event, data);
             });
         }
 
@@ -22,10 +24,10 @@ module.exports = function(server,game,chat) {
     })();
 
     // Forward chat messages to clients.
-    chat.on('msg', function (msg) { io.to('joined').emit('msg', msg); });
-    chat.on('modmsg', function (msg) { io.to('moderators').emit('msg', msg); });
+    chat.on('msg', function (msg) { nsp.to('joined').emit('msg', msg); });
+    chat.on('modmsg', function (msg) { nsp.to('moderators').emit('msg', msg); });
 
-    io.on('connection', onConnection);
+    nsp.on('connection', onConnection);
 
     function onConnection(socket) {
 
