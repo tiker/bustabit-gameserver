@@ -5,7 +5,7 @@ var lib = require('./lib');
 
 module.exports = function(server,game,chat) {
     var io = socketio(server);
-    var nsp = nsp.of('/game');
+    var nsp = io.of('/game');
 
 
     (function() {
