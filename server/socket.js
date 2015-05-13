@@ -4,9 +4,7 @@ var database = require('./database');
 var lib = require('./lib');
 
 module.exports = function(server,game,chat) {
-    var io = socketio(server,{
-        'path': '/game/socket.io'
-    });
+    var io = socketio(server);
 
     (function() {
         function on(event) {
