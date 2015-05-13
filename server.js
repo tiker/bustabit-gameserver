@@ -16,30 +16,9 @@ var port = process.env.PORT || 3842;
 
 var server;
 
-if (process.env.USE_HTTPS) {
-    var options = {
-        key: fs.readFileSync(path.join(__dirname, '/nginx.key')),
-        cert: fs.readFileSync(path.join(__dirname, '/nginx.crt')),
-        secureProtocol: 'SSLv23_method',
-        secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_SSLv2,
-        ca: [
-            fs.readFileSync(path.join(__dirname, '/AddTrustExternalCARoot.crt')),
-            fs.readFileSync(path.join(__dirname, '/COMODORSAAddTrustCA.crt')),
-            fs.readFileSync(path.join(__dirname, '/COMODORSADomainValidationSecureServerCA.crt')),
-        ],
-        requestCert: true,
-        rejectUnauthorized: false
-    };
-
-    server = require('https').createServer(options).listen(port, function() {
-        console.log('Listening on port ', port, ' on HTTPS!');
-    });
-
-} else {
-    server = require('http').createServer().listen(port, function() {
-        console.log('Listening on port ', port, ' with http');
-    });
-}
+server = require('http').createServer().listen(port, function() {
+    console.log('Listening on port ', port, ' with http');
+});
 
 async.parallel([
     database.getGameHistory,
